@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
 
+import java.util.LinkedList;
+
 /**
  * Created by yiqian on 2018/4/12.
  */
@@ -22,10 +24,19 @@ public class MainFragment extends Fragment {
     private String date = "";
 
     private View rootView;
+    private ListViewAdapter listViewAdapter;
+
+    private LinkedList<RecordBean> records = new LinkedList<>();
 
     @SuppressLint("ValidFragment")
     public MainFragment(String date){
         this.date = date;
+
+        records.add(new RecordBean());
+        records.add(new RecordBean());
+        records.add(new RecordBean());
+
+        records.add(new RecordBean());
     }
 
     @Nullable
@@ -41,5 +52,12 @@ public class MainFragment extends Fragment {
         textView = (TextView) rootView.findViewById(R.id.day_text);
         listView = (ListView) rootView.findViewById(R.id.listView);
         textView.setText(date);
+        listViewAdapter = new ListViewAdapter(getContext());
+        listViewAdapter.setData(records);
+        listView.setAdapter(listViewAdapter);
+
+        if(listView.getCount()>0){
+            rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
+        }
     }
 }
