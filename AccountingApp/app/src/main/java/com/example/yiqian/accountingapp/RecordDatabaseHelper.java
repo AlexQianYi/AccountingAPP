@@ -107,7 +107,7 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper{
         LinkedList<String> dates = new LinkedList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select DISTINCT * from Record order by date asc", new String[]);
+        Cursor cursor = db.rawQuery("select DISTINCT * from Record order by date asc", new String[]{});
 
         if(cursor.moveToFirst()){
             do{
