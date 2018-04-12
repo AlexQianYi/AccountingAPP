@@ -2,8 +2,11 @@ package com.example.yiqian.accountingapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.LinkedList;
 
 /**
  * Created by yiqian on 2018/4/11.
@@ -21,6 +24,7 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper{
             "type integer, " +
             "category text, " +
             "remark text, " +
+            "amount double, " +
             "time integer, " +
             "date date )";
 
@@ -64,5 +68,57 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper{
         bean.setUuid(uuid);
         addRecord(bean);
     }
-    
+
+    public LinkedList<RecordBean> readRecords(String dateStr){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        LinkedList<RecordBean> records = new LinkedList<>();
+
+        Cursor cursor = db.rawQuery("select DISTINCE * from Record where date = ? order by time asc", new String[]{dateStr});
+        if (cursor.moveToFirst()){
+            do{
+                String uuid = cursor.getString(cursor.getColumnIndex("uuid"));
+                int type = cursor.getInt(cursor.getColumnIndex("type"));
+                String category = cursor.getString(cursor.getColumnIndex("category"));
+                String remark = cursor.getString(cursor.getColumnIndex("remark"));
+                double amount = cursor.getDouble(cursor.getColumnIndex("amount"));
+                String date = cursor.getString(cursor.getColumnIndex("date"));
+                long timeStamp = cursor.getLong(cursor.getColumnIndex("time"));
+
+                RecordBean record = new RecordBean();
+                record.setUuid(uuid);
+                record.setType(type);
+                record.setCategory(category);
+                record.setAmount(amount);
+                record.setDate(date);
+                record.setRemark(remark);
+                record.setTimeStamp(timeStamp);
+
+                records.add(record);
+
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        return records;
+    }
+
+    public LinkedList<String> getAvailableDate(){
+        LinkedList<String> dates = new LinkedList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select DISTINCT * from Record order by date asc", new String[]);
+
+        if(cursor.moveToFirst()){
+            do{
+                String date = cursor.getString(cursor.getColumnIndex("date"));
+                if(!dates.contains(date)){
+                    dates.add(date);
+                }
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        return dates;
+    }
 }
