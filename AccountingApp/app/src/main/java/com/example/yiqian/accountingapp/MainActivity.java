@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecordBean bean = new RecordBean();
 
-
+        getSupportActionBar().setElevation(0);
 
     }
 }
