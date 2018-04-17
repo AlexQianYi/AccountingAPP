@@ -26,43 +26,49 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_nine).setOnClickListener(this);
         findViewById(R.id.keyboard_zero).setOnClickListener(this);
 
+        handleBackspace();
+        handleTypeChange();
+        handleChange();
+        handleDot();
+
     }
 
     private void handleDot(){
         findViewById(R.id.keyboard_dot).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, ". clicked");
             }
         });
     }
 
-    private void handleDot(){
-        findViewById(R.id.keyboard_dot).setOnClickListener(new View.OnClickListener(){
+    private void handleTypeChange(){
+        findViewById(R.id.keyboard_category).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "category clicked");
             }
         });
     }
 
-    private void handleDot(){
-        findViewById(R.id.keyboard_dot).setOnClickListener(new View.OnClickListener(){
+    private void handleBackspace(){
+        findViewById(R.id.keyboard_backspace).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "backspace clicked");
             }
         });
     }
 
-    private void handleDot(){
-        findViewById(R.id.keyboard_dot).setOnClickListener(new View.OnClickListener(){
+    private void handleChange(){
+        findViewById(R.id.keyboard_change).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "change clicked");
             }
         });
     }
+
 
     @Override
     public void onClick(View v) {
