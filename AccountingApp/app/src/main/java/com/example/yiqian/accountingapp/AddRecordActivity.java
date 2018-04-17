@@ -10,6 +10,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     private static String TAG = "AddRecordActivity";
 
+    private String userinput = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,10 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 Log.d(TAG, ". clicked");
+
+                if(!userinput.contains(".")) {
+                    userinput += ".";
+                }
             }
         });
     }
@@ -76,5 +82,16 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         String input = button.getText().toString();
 
         Log.d(TAG, input);
+
+        if(userinput.contains(".")) {
+
+            if(userinput.split("\\.").length == 1 || userinput.split("\\.")[1].length() < 2){
+                userinput += input;
+            }
+
+        }else {
+
+            userinput += input;
+        }
     }
 }
