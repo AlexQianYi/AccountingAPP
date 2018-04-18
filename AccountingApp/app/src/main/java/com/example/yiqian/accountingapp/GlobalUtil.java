@@ -51,6 +51,7 @@ public class GlobalUtil {
     }
 
     public void setContext(Context context) {
+        this.context = context;
         databaseHelper = new RecordDatabaseHelper(context, RecordDatabaseHelper.DB_NAME, null, 1);
 
         for(int i=0; i<costTitle.length; i++){
