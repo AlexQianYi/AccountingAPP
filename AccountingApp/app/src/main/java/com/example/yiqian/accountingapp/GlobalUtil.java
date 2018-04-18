@@ -48,11 +48,17 @@ public class GlobalUtil {
             "Hosing", "Travel", "Tickets",
             "Books", "Medical", "Transfer"};
 
-    private static int[] earnIconRes = {};
+    private static int[] earnIconRes = {R.drawable.ic_local_atm_white_24dp, R.drawable.ic_local_activity_white_24dp,
+            R.drawable.ic_credit_card_white_24dp, R.drawable.ic_redeem_white_24dp, R.drawable.ic_person_add_white_24dp,
+            R.drawable.ic_add_shopping_cart_white_24dp, R.drawable.ic_trending_up_white_24dp};
 
-    private static int[] earnIconResBlack = {};
+    private static int[] earnIconResBlack = {R.drawable.ic_local_atm_black_24dp, R.drawable.ic_local_activity_black_24dp,
+            R.drawable.ic_credit_card_black_24dp, R.drawable.ic_redeem_black_24dp, R.drawable.ic_person_add_black_24dp,
+            R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_trending_up_black_24dp};
 
-    private static String[] earnTitle = {};
+    private static String[] earnTitle = {"General", "Reimburse",
+            "Salary", "RedPocket", "Part-time",
+            "Bonus", "Investment"};
 
 
 
