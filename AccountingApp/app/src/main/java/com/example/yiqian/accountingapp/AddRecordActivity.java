@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static String TAG = "AddRecordActivity";
 
     private String userinput = "";
+    private TextView amountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_eight).setOnClickListener(this);
         findViewById(R.id.keyboard_nine).setOnClickListener(this);
         findViewById(R.id.keyboard_zero).setOnClickListener(this);
+
+        //amountText = (TextView) findViewById(R.id.textView_amount);
 
         handleBackspace();
         handleTypeChange();
@@ -61,7 +65,15 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_backspace).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "backspace clicked");
+                if(userinput.length()>0){
+                    userinput = userinput.substring(0, userinput.length()-1);
+                }
+
+                if(userinput.length()>0 && userinput.charAt(userinput.length()-1)=='.'){
+                    userinput = userinput.substring(0, userinput.length()-1);
+                }
+
+                updateAmountText();
             }
         });
     }
@@ -81,7 +93,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         Button button = (Button) v;
         String input = button.getText().toString();
 
-        Log.d(TAG, input);
 
         if(userinput.contains(".")) {
 
@@ -93,5 +104,34 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
             userinput += input;
         }
+
+        updateAmountText();
+        Log.d(TAG, "onClick: "+userinput);
+
+    }
+
+    // update textView
+    private void updateAmountText(){
+
+        Log.d(TAG, "updateAmountText: "+ userinput);
+
+        if(userinput.contains(".")){
+
+            if(userinput.split("\\.").length == 1){
+                amountText.setText(userinput + "00");
+
+            }else if(userinput.split("\\.")[1].length()==1){
+                amountText.setText(userinput+"0");
+            }else if(userinput.split("\\.")[1].length()==2){
+                amountText.setText(userinput);
+            }else{
+                if(userinput.equals("")){
+                    amountText.setText("0.00");
+                }else{
+                    amountText.setText(userinput+".00");
+                }
+            }
+        }
+
     }
 }
