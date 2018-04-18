@@ -2,6 +2,8 @@ package com.example.yiqian.accountingapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     private String userinput = "";
     private TextView amountText;
+
+    private RecyclerView recyclerView;
+    private CategoryRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,15 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         handleTypeChange();
         handleChange();
         handleDot();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        adapter = new CategoryRecyclerAdapter(getApplicationContext());
+        recyclerView.setAdapter(adapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        adapter.notifyDataSetChanged();
+
 
     }
 

@@ -68,7 +68,7 @@ class CategoryViewHolder extends RecyclerView.ViewHolder{
     ImageView imageView;
     TextView textView;
 
-    public CategoryViewHoler(View itemView) {
+    public CategoryViewHolder(View itemView) {
         super(itemView);
 
         background = (RelativeLayout)itemView.findViewById(R.id.cell_background);

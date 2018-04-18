@@ -213,6 +213,7 @@
             android:layout_height="50dp" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:background="@android:color/white"
             android:layout_margin="10dp"
             android:layout_below="@id/editText"
