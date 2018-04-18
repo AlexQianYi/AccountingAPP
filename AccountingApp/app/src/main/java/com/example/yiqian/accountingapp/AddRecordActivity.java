@@ -43,7 +43,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_dot).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, ". clicked");
 
                 if(!userinput.contains(".")) {
                     userinput += ".";
@@ -120,7 +119,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     // update textView
     private void updateAmountText(){
 
-        Log.d(TAG, "updateAmountText: "+ userinput);
 
         if(userinput.contains(".")){
 
