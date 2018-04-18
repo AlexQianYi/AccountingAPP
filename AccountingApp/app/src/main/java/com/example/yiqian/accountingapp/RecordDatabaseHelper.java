@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -55,6 +56,8 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper{
         values.put("date", bean.getDate());
         values.put("time", bean.getTimeStamp());
         db.insert(DB_NAME, null, values);
+        values.clear();
+        Log.d(TAG, bean.getUuid() + " added");
     }
 
     public void removeRecord(String uuid){

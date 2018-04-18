@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener, CategoryRecyclerAdapter.OnCategoryClickListener{
 
@@ -122,14 +123,28 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                if(!userinput.equals("")){
-                double amount = Double.valueOf(userinput);
+                if(!userinput.equals("")) {
+                    double amount = Double.valueOf(userinput);
 
-                Log.d(TAG, "change clicked" + amount);}
-            else
+                    RecordBean record = new RecordBean();
+                    record.setAmount(amount);
 
-            {
-            }
+                    if (type == RecordBean.RecordType.RECORD_TYPE_EXPENSE) {
+                        record.setType(1);
+                    } else {
+                        record.setType(2);
+                    }
+
+                    record.setCategory(adapter.getSelected());
+                    record.setRemark(editText.getText().toString());
+                    GlobalUtil.getInstance().databaseHelper.addRecord(record);
+                    finish();
+
+
+                }else{
+                        Toast.makeText(getApplicationContext(), "Amount is 0 !!", Toast.LENGTH_SHORT).show();
+                    }
+
             }
         });
     }
@@ -184,6 +199,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(String category) {
         this.category = category;
-        Log.d(TAG, "category" + category);
+        editText.setText(category);
     }
 }
