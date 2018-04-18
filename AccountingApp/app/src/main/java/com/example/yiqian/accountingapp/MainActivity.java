@@ -35,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         GlobalUtil.getInstance().setContext(getApplicationContext());
-        GlobalUtil.getInstance().databaseHelper.readRecords("2017-11-11");
-        GlobalUtil.getInstance().databaseHelper.readRecords("2017-11-11");
-        GlobalUtil.getInstance().databaseHelper.readRecords("2017-11-11");
 
 
     }
