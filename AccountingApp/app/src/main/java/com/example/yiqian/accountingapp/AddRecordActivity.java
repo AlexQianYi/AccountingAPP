@@ -30,7 +30,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_nine).setOnClickListener(this);
         findViewById(R.id.keyboard_zero).setOnClickListener(this);
 
-        //amountText = (TextView) findViewById(R.id.textView_amount);
+        amountText = (TextView) findViewById(R.id.textView_amount);
 
         handleBackspace();
         handleTypeChange();
@@ -106,7 +106,6 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
 
         updateAmountText();
-        Log.d(TAG, "onClick: "+userinput);
 
     }
 
@@ -124,12 +123,13 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
                 amountText.setText(userinput+"0");
             }else if(userinput.split("\\.")[1].length()==2){
                 amountText.setText(userinput);
+            }
+
+        }else{
+            if(userinput.equals("")){
+                amountText.setText("0.00");
             }else{
-                if(userinput.equals("")){
-                    amountText.setText("0.00");
-                }else{
-                    amountText.setText(userinput+".00");
-                }
+                amountText.setText(userinput+".00");
             }
         }
 
