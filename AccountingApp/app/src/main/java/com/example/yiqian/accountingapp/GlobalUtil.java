@@ -1,7 +1,6 @@
 package com.example.yiqian.accountingapp;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -64,7 +63,6 @@ public class GlobalUtil {
 
 
     public static GlobalUtil getInstance(){
-        Log.d(TAG, "ini");
         if(instance == null){
             instance = new GlobalUtil();
         }

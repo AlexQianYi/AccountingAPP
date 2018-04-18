@@ -7,17 +7,27 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener, CategoryRecyclerAdapter.OnCategoryClickListener{
 
     private static String TAG = "AddRecordActivity";
+
+    private EditText editText;
 
     private String userinput = "";
     private TextView amountText;
 
     private RecyclerView recyclerView;
     private CategoryRecyclerAdapter adapter;
+
+
+
+
+    private String category = "General";
+    private RecordBean.RecordType type = RecordBean.RecordType.RECORD_TYPE_EXPENSE;
+    private String remark = "General";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_zero).setOnClickListener(this);
 
         amountText = (TextView) findViewById(R.id.textView_amount);
+        editText = (EditText) findViewById(R.id.editText);
+        editText.setText(remark);
 
         handleBackspace();
         handleTypeChange();
@@ -49,6 +61,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter.notifyDataSetChanged();
+
+        adapter.setOnCategoryClickListener(this);
 
 
     }
@@ -69,9 +83,16 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_category).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "category clicked");
+                if(type == RecordBean.RecordType.RECORD_TYPE_EXPENSE){
+                    type = RecordBean.RecordType.RECORD_TYPE_INCONE;
+                }else
+                    type = RecordBean.RecordType.RECORD_TYPE_EXPENSE;
             }
         });
+
+        adapter.changeType(type);
+        category = adapter.getSelected();
+
     }
 
     private void handleBackspace(){
@@ -153,5 +174,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
             }
         }
 
+    }
+
+    @Override
+    public void onClick(String category) {
+        this.category = category;
+        Log.d(TAG, "category" + category);
     }
 }

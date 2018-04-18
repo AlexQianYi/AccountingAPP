@@ -23,7 +23,17 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
 
     private LinkedList<CategoryResBean> cellList = GlobalUtil.getInstance().costRes;
 
+    public String getSelected() {
+        return selected;
+    }
+
     private String selected = "";
+
+    public void setOnCategoryClickListener(OnCategoryClickListener onCategoryClickListener) {
+        this.onCategoryClickListener = onCategoryClickListener;
+    }
+
+    private OnCategoryClickListener onCategoryClickListener;
 
     public CategoryRecyclerAdapter(Context context){
         this.mContext = context;
@@ -47,6 +57,19 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
         holder.imageView.setImageResource(res.resBlack);
         holder.textView.setText(res.title);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                selected = res.title;
+                notifyDataSetChanged();
+
+                if(onCategoryClickListener!=null){
+                    onCategoryClickListener.onClick(res.title);
+                }
+            }
+        });
+
         if(holder.textView.getText().toString().equals(selected)){
             holder.background.setBackgroundResource(R.drawable.bg_edit_text);
         }else{
@@ -55,9 +78,24 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
 
     }
 
+    public void changeType(RecordBean.RecordType type){
+        if(type == RecordBean.RecordType.RECORD_TYPE_EXPENSE){
+            cellList = GlobalUtil.getInstance().costRes;
+        }else{
+            cellList = GlobalUtil.getInstance().earnRes;
+        }
+
+        selected = cellList.get(0).title;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return cellList.size();
+    }
+
+    public interface OnCategoryClickListener{
+        void onClick(String category);
     }
 }
 
