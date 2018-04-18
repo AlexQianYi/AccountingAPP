@@ -51,7 +51,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
         handleBackspace();
         handleTypeChange();
-        handleChange();
+        handleDone();
         handleDot();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -63,6 +63,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         adapter.notifyDataSetChanged();
 
         adapter.setOnCategoryClickListener(this);
+
+        Log.d(TAG, "onCreate: add activity ini" );
 
 
     }
@@ -83,15 +85,18 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_category).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(type == RecordBean.RecordType.RECORD_TYPE_EXPENSE){
+                if (type == RecordBean.RecordType.RECORD_TYPE_EXPENSE) {
                     type = RecordBean.RecordType.RECORD_TYPE_INCONE;
-                }else
+                } else {
                     type = RecordBean.RecordType.RECORD_TYPE_EXPENSE;
+                }
+
+                adapter.changeType(type);
+                category = adapter.getSelected();
             }
         });
 
-        adapter.changeType(type);
-        category = adapter.getSelected();
+
 
     }
 
@@ -112,7 +117,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    private void handleChange(){
+    private void handleDone(){
         findViewById(R.id.keyboard_change).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

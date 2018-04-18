@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -32,7 +31,6 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper{
 
     public RecordDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-        Log.d(TAG, "database helper ini");
     }
 
     @Override
