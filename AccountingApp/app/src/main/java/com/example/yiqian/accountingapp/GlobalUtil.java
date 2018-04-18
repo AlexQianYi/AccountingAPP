@@ -26,21 +26,27 @@ public class GlobalUtil {
 
     private static int[] costIconRes = {R.drawable.ic_local_atm_white_24dp, R.drawable.ic_local_dining_white_24dp,
             R.drawable.ic_local_bar_white_24dp, R.drawable.ic_shopping_basket_white_24dp, R.drawable.ic_shopping_cart_white_24dp,
-            R.drawable.ic_person_white_24dp,R.drawable.ic_videogame_asset_white_24dp, R.drawable.ic_supervisor_account_white_24dp,
-            R.drawable.ic_directions_bus_white_24dp, R.drawable.ic_domain_white_24dp, R.drawable.ic_stay_current_portrait_white_24dp,
-            R.drawable.ic_desktop_mac_white_24dp, R.drawable.ic_card_giftcard_white_24dp, R.drawable.ic_home_white_24dp,
-            R.drawable.ic_flight_takeoff_white_24dp, R.drawable.ic_receipt_white_24dp, R.drawable.ic_book_white_24dp,
-            R.drawable.ic_local_hospital_white_24dp, R.drawable.ic_autorenew_white_24dp };
+            R.drawable.ic_person_white_24dp,R.drawable.ic_videogame_asset_white_24dp, R.drawable.ic_movie_white_24dp,
+            R.drawable.ic_supervisor_account_white_24dp, R.drawable.ic_directions_bus_white_24dp, R.drawable.ic_domain_white_24dp,
+            R.drawable.ic_stay_current_portrait_white_24dp, R.drawable.ic_desktop_mac_white_24dp, R.drawable.ic_card_giftcard_white_24dp,
+            R.drawable.ic_home_white_24dp, R.drawable.ic_flight_takeoff_white_24dp, R.drawable.ic_receipt_white_24dp,
+            R.drawable.ic_book_white_24dp, R.drawable.ic_local_hospital_white_24dp, R.drawable.ic_autorenew_white_24dp };
 
     private static int[] costIconResBlack = {R.drawable.ic_local_atm_black_24dp, R.drawable.ic_local_dining_black_24dp,
             R.drawable.ic_local_bar_black_24dp, R.drawable.ic_shopping_basket_black_24dp, R.drawable.ic_shopping_cart_black_24dp,
-            R.drawable.ic_person_black_24dp, R.drawable.ic_videogame_asset_black_24dp, R.drawable.ic_supervisor_account_black_24dp,
-            R.drawable.ic_directions_bus_black_24dp, R.drawable.ic_domain_black_24dp, R.drawable.ic_stay_current_portrait_black_24dp,
-            R.drawable.ic_desktop_mac_black_24dp, R.drawable.ic_card_giftcard_black_24dp, R.drawable.ic_home_black_24dp,
-            R.drawable.ic_flight_takeoff_black_24dp, R.drawable.ic_receipt_black_24dp, R.drawable.ic_book_black_24dp,
-            R.drawable.ic_local_hospital_black_24dp, R.drawable.ic_autorenew_black_24dp };
+            R.drawable.ic_person_black_24dp, R.drawable.ic_videogame_asset_black_24dp, R.drawable.ic_movie_black_24dp,
+            R.drawable.ic_supervisor_account_black_24dp, R.drawable.ic_directions_bus_black_24dp, R.drawable.ic_domain_black_24dp,
+            R.drawable.ic_stay_current_portrait_black_24dp, R.drawable.ic_desktop_mac_black_24dp, R.drawable.ic_card_giftcard_black_24dp,
+            R.drawable.ic_home_black_24dp, R.drawable.ic_flight_takeoff_black_24dp, R.drawable.ic_receipt_black_24dp,
+            R.drawable.ic_book_black_24dp, R.drawable.ic_local_hospital_black_24dp, R.drawable.ic_autorenew_black_24dp };
 
-    private static String[] costTitle = {};
+    private static String[] costTitle = {"General", "Food",
+            "Drinks", "Groceries", "Shopping",
+            "Personal", "Entertain", "Movies",
+            "Social", "Transport", "Store",
+            "Phone", "Computer", "Gifts",
+            "Hosing", "Travel", "Tickets",
+            "Books", "Medical", "Transfer"};
 
     private static int[] earnIconRes = {};
 
