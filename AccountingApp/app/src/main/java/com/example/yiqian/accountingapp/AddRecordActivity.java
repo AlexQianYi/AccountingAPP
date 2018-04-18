@@ -82,7 +82,15 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.keyboard_change).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "change clicked");
+
+                if(!userinput.equals("")){
+                double amount = Double.valueOf(userinput);
+
+                Log.d(TAG, "change clicked" + amount);}
+            else
+
+            {
+            }
             }
         });
     }
