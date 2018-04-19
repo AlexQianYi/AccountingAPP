@@ -15,10 +15,8 @@ public class GlobalUtil {
     private static GlobalUtil instance;
 
     public RecordDatabaseHelper databaseHelper;
-
-
-
     public Context context;
+    public MainActivity mainActivity;
 
     public LinkedList<CategoryResBean> costRes = new LinkedList<>();
     public LinkedList<CategoryResBean> earnRes = new LinkedList<>();
@@ -67,6 +65,23 @@ public class GlobalUtil {
             instance = new GlobalUtil();
         }
         return instance;
+    }
+
+    public int getResourceIcon(String category){
+
+        for(CategoryResBean res:costRes){
+            if(res.title.equals(category)){
+                return res.resWhite;
+            }
+        }
+
+        for(CategoryResBean res:earnRes){
+            if(res.title.equals(category)){
+                return  res.resWhite;
+            }
+        }
+
+        return costRes.get(0).resWhite;
     }
 
     public GlobalUtil(){

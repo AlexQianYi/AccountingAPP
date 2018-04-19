@@ -32,11 +32,7 @@ public class MainFragment extends Fragment {
     public MainFragment(String date){
         this.date = date;
 
-        records.add(new RecordBean());
-        records.add(new RecordBean());
-        records.add(new RecordBean());
-
-        records.add(new RecordBean());
+        records = GlobalUtil.getInstance().databaseHelper.readRecords(date);
     }
 
     @Nullable
@@ -46,6 +42,15 @@ public class MainFragment extends Fragment {
         initView();
         return rootView;
 
+    }
+
+    public void reload(){
+        records = GlobalUtil.getInstance().databaseHelper.readRecords(date);
+        listViewAdapter.setData(records);
+
+        if(listView.getCount()>0){
+            rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
+        }
     }
 
     private void initView(){
@@ -59,5 +64,19 @@ public class MainFragment extends Fragment {
         if(listView.getCount()>0){
             rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
         }
+
+        textView.setText(DateUtil.getDateTitle(date));
+    }
+
+    public int getTotalCost(){
+        double totalCost = 0;
+
+        for(RecordBean record:records){
+            if(record.getType()==1){
+                totalCost += record.getAmount();
+            }
+        }
+
+        return (int)totalCost;
     }
 }

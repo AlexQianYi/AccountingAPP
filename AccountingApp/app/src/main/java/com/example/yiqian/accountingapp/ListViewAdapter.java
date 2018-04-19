@@ -69,13 +69,25 @@ class ViewHolder{
     TextView remarkTV;
     TextView amountTV;
     TextView timeTV;
-    ImageView categoryTcone;
+    ImageView categoryIcon;
 
     public ViewHolder(View itemView, RecordBean record){
         remarkTV = (TextView) itemView.findViewById(R.id.textView_remark);
         amountTV = (TextView) itemView.findViewById(R.id.textView_amount);
         timeTV = (TextView) itemView.findViewById(R.id.textView_time);
-        categoryTcone = (ImageView) itemView.findViewById(R.id.imageView_category);
+        categoryIcon = (ImageView) itemView.findViewById(R.id.imageView_category);
+
+        remarkTV.setText(record.getRemark());
+
+        if(record.getType()==1){
+            amountTV.setText("- " + record.getAmount());
+        }else{
+            amountTV.setText("+" + record.getAmount());
+        }
+
+        timeTV.setText(DateUtil.getFormattedTime(record.getTimeStamp()));
+
+        categoryIcon.setImageResource(GlobalUtil.getInstance().getResourceIcon(record.getCategory()));
 
 
     }
