@@ -1,14 +1,18 @@
 package com.example.yiqian.accountingapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
 
 import java.util.LinkedList;
 
@@ -16,7 +20,7 @@ import java.util.LinkedList;
  * Created by yiqian on 2018/4/12.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     private TextView textView;
     private ListView listView;
@@ -66,6 +70,8 @@ public class MainFragment extends Fragment {
         }
 
         textView.setText(DateUtil.getDateTitle(date));
+
+        listView.setOnItemClickListener(this);
     }
 
     public int getTotalCost(){
@@ -78,5 +84,46 @@ public class MainFragment extends Fragment {
         }
 
         return (int)totalCost;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        showDialog(position);
+
+    }
+
+    private void showDialog(final int index){
+        final String[] options = {"Remove", "Edit"};
+
+        final RecordBean selectedRecord = records.get(index);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.create();
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(which==0){
+                    String uuid = selectedRecord.getUuid();
+                    GlobalUtil.getInstance().databaseHelper.removeRecord(uuid);
+                    reload();
+                }else if(which==1){
+                    Intent intent = new Intent(getActivity(), AddRecordActivity.class);
+                    Bundle extra = new Bundle();
+                    extra.putSerializable("record", selectedRecord);
+                    intent.putExtras(extra);
+                    startActivityForResult(intent, 1);
+
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        builder.create().show();
+
+
     }
 }

@@ -1,12 +1,13 @@
 package com.example.yiqian.accountingapp;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by yiqian on 2018/4/11.
  */
 
-public class RecordBean {
+public class RecordBean implements Serializable{
 
     private static String TAG = "RecordBean";
 

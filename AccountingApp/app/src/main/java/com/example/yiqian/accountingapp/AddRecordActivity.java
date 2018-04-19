@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,7 +64,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
         adapter.setOnCategoryClickListener(this);
 
-        Log.d(TAG, "onCreate: add activity ini" );
+        RecordBean record = (RecordBean) getIntent().getSerializableExtra("record");
+
+        if (record!=null){
+
+        }
 
 
     }
