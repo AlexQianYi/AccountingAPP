@@ -13,13 +13,15 @@ import com.robinhood.ticker.TickerView;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
 
-    private static String TAG = "MainActivity";
+    private static final String TAG = "MainActivity";
 
 
     private ViewPager viewPager;
     private MainViewPagerAdapter pagerAdapter;
     private TickerView amountText;
     private TextView dateText;
+
+    private int currentPagerPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         pagerAdapter.reload();
+        updateHeader();
         Log.d(TAG, "onActivityResult: ");
     }
 
@@ -70,11 +73,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
 
-        String amount = String.valueOf(pagerAdapter.getTotalCost(position)) + " ";
+        currentPagerPosition = position;
+        updateHeader();
+
+    }
+
+    public void updateHeader(){
+        String amount = String.valueOf(pagerAdapter.getTotalCost(currentPagerPosition)) + " ";
         amountText.setText(amount);
-        String date = pagerAdapter.getDateStr(position);
+        String date = pagerAdapter.getDateStr(currentPagerPosition);
         dateText.setText(DateUtil.getWeekDay(date));
-        Log.d(TAG, "page pos" + position);
+        Log.d(TAG, "page pos" + currentPagerPosition);
 
     }
 

@@ -13,7 +13,8 @@
         android:elevation ="0dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="120dp"
+        android:background="#00BFFF">
 
 
 
@@ -62,7 +63,7 @@
                 android:text="june 22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@android:color/white"/>
 
         </RelativeLayout>
 

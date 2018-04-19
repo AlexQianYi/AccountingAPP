@@ -10,7 +10,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:background="#5e5e5e"
+            android:background="@color/colorBar"
             android:text="june44"
             android:textColor="@android:color/white"
             android:textStyle="bold"

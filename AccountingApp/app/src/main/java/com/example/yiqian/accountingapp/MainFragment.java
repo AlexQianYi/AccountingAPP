@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * Created by yiqian on 2018/4/12.
  */
 
-public class MainFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class MainFragment extends Fragment implements AdapterView.OnItemLongClickListener{
 
     private TextView textView;
     private ListView listView;
@@ -50,9 +50,17 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
 
     public void reload(){
         records = GlobalUtil.getInstance().databaseHelper.readRecords(date);
-        listViewAdapter.setData(records);
+        //listViewAdapter.setData(records);
 
-        if(listView.getCount()>0){
+        if(listViewAdapter == null){
+            listViewAdapter = new ListViewAdapter(getActivity().getApplicationContext());
+        }
+
+        listViewAdapter.setData(records);
+        listView.setAdapter(listViewAdapter);
+
+
+        if(listViewAdapter.getCount()>0){
             rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
         }
     }
@@ -65,13 +73,13 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         listViewAdapter.setData(records);
         listView.setAdapter(listViewAdapter);
 
-        if(listView.getCount()>0){
+        if(listViewAdapter.getCount()>0){
             rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
         }
 
         textView.setText(DateUtil.getDateTitle(date));
 
-        listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
     }
 
     public int getTotalCost(){
@@ -86,11 +94,6 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         return (int)totalCost;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showDialog(position);
-
-    }
 
     private void showDialog(final int index){
         final String[] options = {"Remove", "Edit"};
@@ -109,6 +112,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
                     String uuid = selectedRecord.getUuid();
                     GlobalUtil.getInstance().databaseHelper.removeRecord(uuid);
                     reload();
+                    GlobalUtil.getInstance().mainActivity.updateHeader();
                 }else if(which==1){
                     Intent intent = new Intent(getActivity(), AddRecordActivity.class);
                     Bundle extra = new Bundle();
@@ -125,5 +129,11 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         builder.create().show();
 
 
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        showDialog(position);
+        return false;
     }
 }

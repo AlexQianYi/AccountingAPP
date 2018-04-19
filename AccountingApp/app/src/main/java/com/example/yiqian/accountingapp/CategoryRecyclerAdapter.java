@@ -71,7 +71,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
         });
 
         if(holder.textView.getText().toString().equals(selected)){
-            holder.background.setBackgroundResource(R.drawable.bg_edit_text);
+            holder.background.setBackgroundResource(R.drawable.bg_chose_category);
         }else{
             holder.background.setBackgroundResource(R.color.colorPrimary);
         }

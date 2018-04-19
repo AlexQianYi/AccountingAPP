@@ -28,6 +28,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     private String category = "General";
     private RecordBean.RecordType type = RecordBean.RecordType.RECORD_TYPE_EXPENSE;
     private String remark = "General";
+    RecordBean record = new RecordBean();
+
+    private boolean inEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         RecordBean record = (RecordBean) getIntent().getSerializableExtra("record");
 
         if (record!=null){
+            inEdit = true;
+            this.record = record;
 
         }
 
@@ -129,7 +134,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
                 if(!userinput.equals("")) {
                     double amount = Double.valueOf(userinput);
 
-                    RecordBean record = new RecordBean();
+
                     record.setAmount(amount);
 
                     if (type == RecordBean.RecordType.RECORD_TYPE_EXPENSE) {
@@ -140,7 +145,15 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
                     record.setCategory(adapter.getSelected());
                     record.setRemark(editText.getText().toString());
-                    GlobalUtil.getInstance().databaseHelper.addRecord(record);
+
+                    if(inEdit){
+                        GlobalUtil.getInstance().databaseHelper.editRecord(record.getUuid(), record);
+
+                    }else{
+                        GlobalUtil.getInstance().databaseHelper.addRecord(record);
+                    }
+
+                    //GlobalUtil.getInstance().databaseHelper.addRecord(record);
                     finish();
 
 

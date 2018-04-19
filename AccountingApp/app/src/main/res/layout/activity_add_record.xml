@@ -187,9 +187,10 @@
 
     <RelativeLayout
         android:layout_above="@+id/linearLayout"
-        android:background="@color/colorPrimary"
+        android:background="#00BFFF"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         
         <TextView
             android:id="@+id/textView_amount"
@@ -202,8 +203,8 @@
 
         <EditText
             android:id="@+id/editText"
-            android:textColor="@android:color/white"
             android:paddingLeft="10dp"
+            android:textColor="@android:color/white"
             android:textSize="30dp"
             android:text="book"
             android:layout_below="@id/textView_amount"
@@ -214,7 +215,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:background="@android:color/white"
+            android:background="#00BFFF"
             android:layout_margin="10dp"
             android:layout_below="@id/editText"
             android:layout_width="match_parent"
